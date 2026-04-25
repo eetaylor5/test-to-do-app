@@ -1,0 +1,79 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "title": "Sample Todo",
+      "description": "This is a sample todo item",
+      "status": "not started",
+      "tags": [
+        {
+          "name": "sample",
+          "color": "#1976d2"
+        }
+      ],
+      "dueDate": "2026-04-30",
+      "createdDate": "2026-04-24",
+      "listId": 1
+    },
+    {
+      "title": "create app",
+      "description": "",
+      "status": "not started",
+      "tags": [
+        {
+          "name": "CodingPrep",
+          "color": "#ff9800"
+        }
+      ],
+      "dueDate": "2026-04-24",
+      "listId": "1",
+      "createdDate": "2026-04-24",
+      "id": "_nqxV_OUL9o"
+    },
+    {
+      "title": "Wedding Planning",
+      "description": "",
+      "status": "in progress",
+      "tags": [
+        {
+          "name": "WithAavash",
+          "color": "#4caf50"
+        }
+      ],
+      "dueDate": "2026-04-25",
+      "listId": "1",
+      "createdDate": "2026-04-24",
+      "id": "8u2wQGXB4_I"
+    },
+    {
+      "title": "test",
+      "description": "",
+      "status": "not started",
+      "tags": [
+        {
+          "name": "sample",
+          "color": "#1976d2"
+        },
+        {
+          "name": "CodingPrep",
+          "color": "#9c27b0"
+        }
+      ],
+      "dueDate": "",
+      "listId": "1",
+      "createdDate": "2026-04-25",
+      "id": "Ov8KAVkhO2o"
+    }
+  ],
+  "lists": [
+    {
+      "id": "1",
+      "name": "To Do List 32"
+    },
+    {
+      "name": "New List",
+      "id": "G8jFb7WHLP8"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
