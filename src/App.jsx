@@ -8,7 +8,7 @@ import useLists from './hooks/useLists';
 
 function App() {
   const { todos, loading: todosLoading, createTodo, updateTodo, deleteTodo, duplicateTodo, moveTodo, reorderTodo } = useTodos();
-  const { lists, loading: listsLoading, createList, updateList } = useLists();
+  const { lists, loading: listsLoading, createList, updateList, deleteList } = useLists();
   const [searchQuery, setSearchQuery] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [editingTodo, setEditingTodo] = useState(null);
@@ -34,6 +34,22 @@ function App() {
   const handleEditTodo = (todo) => {
     setEditingTodo(todo);
     setShowForm(true);
+  };
+
+  const handleDeleteList = async (listId) => {
+    const confirmed = window.confirm('Delete this list and all its todos?');
+    if (!confirmed) return;
+
+    try {
+      await Promise.all(
+        todos
+          .filter(todo => todo.listId === listId)
+          .map(todo => deleteTodo(todo.id))
+      );
+      await deleteList(listId);
+    } catch (error) {
+      console.error('Error deleting list and todos:', error);
+    }
   };
 
   const handleCancelForm = () => {
@@ -78,6 +94,7 @@ function App() {
         onReorderTodo={reorderTodo}
         onCreateList={createList}
         onUpdateList={updateList}
+        onDeleteList={handleDeleteList}
         onEditTodo={handleEditTodo}
       />
     </Container>

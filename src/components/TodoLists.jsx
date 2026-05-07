@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@mui/material';
 import TodoList from './TodoList';
 
-const TodoLists = ({ lists, todos, onUpdateTodo, onDeleteTodo, onDuplicateTodo, onMoveTodo, onReorderTodo, onCreateList, onUpdateList, onEditTodo }) => {
+const TodoLists = ({ lists, todos, onUpdateTodo, onDeleteTodo, onDuplicateTodo, onMoveTodo, onReorderTodo, onCreateList, onUpdateList, onDeleteList, onEditTodo }) => {
   const [newListName, setNewListName] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingList, setEditingList] = useState(null);
@@ -29,6 +29,12 @@ const TodoLists = ({ lists, todos, onUpdateTodo, onDeleteTodo, onDuplicateTodo, 
     }
   };
 
+  const handleDeleteList = (listId) => {
+    if (window.confirm('Delete this list and all its todos?')) {
+      onDeleteList(listId);
+    }
+  };
+
   const handleCancelEditList = () => {
     setEditingList(null);
     setEditListName('');
@@ -44,8 +50,9 @@ const TodoLists = ({ lists, todos, onUpdateTodo, onDeleteTodo, onDuplicateTodo, 
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1 }}>
             <Typography variant="h5" sx={{ textAlign: 'center' }}>{list.name}</Typography>
           </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mb: 1 }}>
             <Button size="small" onClick={() => handleEditList(list)}>Edit Name</Button>
+            <Button size="small" color="error" onClick={() => handleDeleteList(list.id)}>Delete List</Button>
           </Box>
           <TodoList
             list={list}

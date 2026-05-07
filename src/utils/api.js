@@ -23,11 +23,8 @@ export const api = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(list)
-  }).then(res => res.json()),  updateList: (id, list) => fetch(`${API_BASE_URL}/lists/${id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(list)
-  }).then(res => res.json()),  updateList: (id, list) => fetch(`${API_BASE_URL}/lists/${id}`, {
+  }).then(res => res.json()),
+  updateList: (id, list) => fetch(`${API_BASE_URL}/lists/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(list)

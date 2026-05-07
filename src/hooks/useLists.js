@@ -38,11 +38,21 @@ const useLists = () => {
     }
   };
 
+  const deleteList = async (id) => {
+    try {
+      await api.deleteList(id);
+      setLists(prev => prev.filter(list => list.id !== id));
+    } catch (error) {
+      console.error('Error deleting list:', error);
+    }
+  };
+
   return {
     lists,
     loading,
     createList,
-    updateList
+    updateList,
+    deleteList
   };
 };
 
