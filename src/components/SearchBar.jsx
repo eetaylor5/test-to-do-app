@@ -9,7 +9,7 @@ const SearchBar = ({ onSearch }) => {
   return (
     <Box sx={{ mb: 2 }}>
       <TextField
-        label="Search Todos"
+        label="Search Your Todo Lists"
         variant="outlined"
         fullWidth
         onChange={handleChange}

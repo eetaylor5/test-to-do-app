@@ -43,7 +43,7 @@ const TodoLists = ({ lists, todos, onUpdateTodo, onDeleteTodo, onDuplicateTodo, 
   return (
     <Box>
       <Button variant="contained" onClick={() => setDialogOpen(true)} sx={{ mb: 2 }}>
-        Create New List
+        Create New Todo List
       </Button>
       {lists.map(list => (
         <Box key={list.id} sx={{ mb: 2 }}>

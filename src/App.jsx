@@ -64,12 +64,12 @@ function App() {
   return (
     <Container maxWidth="md">
       <Typography variant="h3" component="h1" gutterBottom>
-        Todo Application
+        Your Todo List
       </Typography>
       <SearchBar onSearch={setSearchQuery} />
       <Box sx={{ mb: 2 }}>
         <Button variant="contained" onClick={() => setShowForm(true)}>
-          Add New Todo
+          Add New Todo List Item
         </Button>
       </Box>
       <Dialog open={showForm} onClose={handleCancelForm} maxWidth="sm" fullWidth>
