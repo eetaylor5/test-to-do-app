@@ -11,7 +11,6 @@ const TodoList = ({ list, todos, onUpdateTodo, onDeleteTodo, onDuplicateTodo, on
 
   return (
     <Box sx={{ mb: 4 }}>
-      <Typography variant="h5">{list.name}</Typography>
       {listTodos.map(todo => (
         <Box key={todo.id}>
           <TodoItem
