@@ -59,7 +59,7 @@ const TodoList = ({ list, todos, onUpdateTodo, onDeleteTodo, onDuplicateTodo, on
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+      <Typography variant="body2" color="text.secondary" sx={{ mb: 2, textAlign: 'center' }}>
         Drag todos here to move them into this list.
       </Typography>
       {listTodos.map((todo, index) => (

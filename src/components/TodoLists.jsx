@@ -44,7 +44,7 @@ const TodoLists = ({ lists, todos, onUpdateTodo, onDeleteTodo, onDuplicateTodo, 
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1 }}>
             <Typography variant="h5" sx={{ textAlign: 'center' }}>{list.name}</Typography>
           </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 1 }}>
             <Button size="small" onClick={() => handleEditList(list)}>Edit Name</Button>
           </Box>
           <TodoList
