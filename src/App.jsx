@@ -7,7 +7,7 @@ import useTodos from './hooks/useTodos';
 import useLists from './hooks/useLists';
 
 function App() {
-  const { todos, loading: todosLoading, createTodo, updateTodo, deleteTodo, duplicateTodo, moveTodo } = useTodos();
+  const { todos, loading: todosLoading, createTodo, updateTodo, deleteTodo, duplicateTodo, moveTodo, reorderTodo } = useTodos();
   const { lists, loading: listsLoading, createList, updateList } = useLists();
   const [searchQuery, setSearchQuery] = useState('');
   const [showForm, setShowForm] = useState(false);
@@ -75,6 +75,7 @@ function App() {
         onDeleteTodo={deleteTodo}
         onDuplicateTodo={duplicateTodo}
         onMoveTodo={moveTodo}
+        onReorderTodo={reorderTodo}
         onCreateList={createList}
         onUpdateList={updateList}
         onEditTodo={handleEditTodo}

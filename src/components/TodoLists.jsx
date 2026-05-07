@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@mui/material';
 import TodoList from './TodoList';
 
-const TodoLists = ({ lists, todos, onUpdateTodo, onDeleteTodo, onDuplicateTodo, onMoveTodo, onCreateList, onUpdateList, onEditTodo }) => {
+const TodoLists = ({ lists, todos, onUpdateTodo, onDeleteTodo, onDuplicateTodo, onMoveTodo, onReorderTodo, onCreateList, onUpdateList, onEditTodo }) => {
   const [newListName, setNewListName] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingList, setEditingList] = useState(null);
@@ -41,8 +41,10 @@ const TodoLists = ({ lists, todos, onUpdateTodo, onDeleteTodo, onDuplicateTodo, 
       </Button>
       {lists.map(list => (
         <Box key={list.id} sx={{ mb: 2 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-            <Typography variant="h5" sx={{ flexGrow: 1 }}>{list.name}</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1 }}>
+            <Typography variant="h5" sx={{ textAlign: 'center' }}>{list.name}</Typography>
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
             <Button size="small" onClick={() => handleEditList(list)}>Edit Name</Button>
           </Box>
           <TodoList
@@ -52,7 +54,7 @@ const TodoLists = ({ lists, todos, onUpdateTodo, onDeleteTodo, onDuplicateTodo, 
             onDeleteTodo={onDeleteTodo}
             onDuplicateTodo={onDuplicateTodo}
             onMoveTodo={onMoveTodo}
-            allLists={lists}
+            onReorderTodo={onReorderTodo}
             onEditTodo={onEditTodo}
           />
         </Box>

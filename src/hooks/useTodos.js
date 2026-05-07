@@ -20,9 +20,18 @@ const useTodos = () => {
     }
   };
 
+  const getNextOrder = (listId) => {
+    const listOrders = todos
+      .filter(todo => todo.listId === listId)
+      .map(todo => Number(todo.order ?? 0));
+
+    return listOrders.length ? Math.max(...listOrders) + 1 : 1;
+  };
+
   const createTodo = async (todo) => {
     try {
-      const newTodo = await api.createTodo(todo);
+      const nextOrder = todo.order ?? getNextOrder(todo.listId);
+      const newTodo = await api.createTodo({ ...todo, order: nextOrder });
       setTodos(prev => [...prev, newTodo]);
     } catch (error) {
       console.error('Error creating todo:', error);
@@ -48,14 +57,49 @@ const useTodos = () => {
   };
 
   const duplicateTodo = async (todo) => {
-    const duplicated = { ...todo, id: Date.now(), title: `${todo.title} (Copy)` };
+    const duplicated = {
+      ...todo,
+      id: Date.now(),
+      title: `${todo.title} (Copy)`,
+      order: getNextOrder(todo.listId)
+    };
     await createTodo(duplicated);
   };
 
   const moveTodo = async (id, newListId) => {
     const todo = todos.find(t => t.id === id);
     if (todo) {
-      await updateTodo(id, { ...todo, listId: newListId });
+      await updateTodo(id, { ...todo, listId: newListId, order: getNextOrder(newListId) });
+    }
+  };
+
+  const reorderTodo = async (todoId, targetListId, targetIndex) => {
+    const movingTodo = todos.find(t => t.id === todoId);
+    if (!movingTodo) return;
+
+    const targetListTodos = todos
+      .filter(t => t.listId === targetListId && t.id !== todoId)
+      .sort((a, b) => (Number(a.order ?? 0) - Number(b.order ?? 0)));
+
+    const updatedOrderTodos = [...targetListTodos];
+    updatedOrderTodos.splice(targetIndex, 0, { ...movingTodo, listId: targetListId });
+
+    const updates = updatedOrderTodos.map((todo, index) => {
+      const newOrder = index + 1;
+      if (Number(todo.order ?? 0) !== newOrder || todo.listId !== targetListId) {
+        return api.updateTodo(todo.id, { ...todo, order: newOrder, listId: targetListId });
+      }
+      return Promise.resolve(todo);
+    });
+
+    try {
+      const results = await Promise.all(updates);
+      setTodos(prev => prev.map(todo => {
+        const updated = results.find(result => result.id === todo.id);
+        return updated ? updated : todo;
+      }));
+    } catch (error) {
+      console.error('Error reordering todo:', error);
     }
   };
 
@@ -66,7 +110,8 @@ const useTodos = () => {
     updateTodo,
     deleteTodo,
     duplicateTodo,
-    moveTodo
+    moveTodo,
+    reorderTodo
   };
 };
 
